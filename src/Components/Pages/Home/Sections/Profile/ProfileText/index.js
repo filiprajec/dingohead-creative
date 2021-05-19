@@ -62,7 +62,7 @@ const ProfileText = forwardRef((props, ref) => {
       <span style={{ color: styles.colors.basic.fireOpal }}>Reusably</span></Link>,
       banishing single use-plastics to their rightful grave 🪦 and volunteer for{" "}
       <Link to="https://refugeeswelcome.org.au/">
-      <span style={{ color: styles.colors.basic.blue }}>
+      <span style={{ color: styles.colors.basic.neonBlue }}>
         {" "}
         Refugees Welcome Australia
       </span></Link>
