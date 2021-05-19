@@ -1,0 +1,19 @@
+@use 'sass:color';
+
+$swamp: #022b3a;
+$geyser: #d5d7e4;
+
+$colors: (
+  background: $swamp,
+  background-secondary: color.adjust($swamp, $lightness: 5%),
+  background-tertiary: color.adjust($swamp, $lightness: 10%),
+  content: $geyser,
+  content-secondary: color.adjust($geyser, $lightness: -5%),
+  content-tertiary: color.adjust($geyser, $lightness: -10%),
+);
+
+@each $name, $value in $colors {
+  :export {
+    #{$name}: #{$value};
+  }
+}

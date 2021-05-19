@@ -1,0 +1,28 @@
+// index.scss
+// <> Filip Rajec
+
+@use "../theme/global.module.scss";
+@use "../fonts/import.scss";
+
+@include import.import-karrik("..");
+
+body {
+  margin: 0;
+  background-color: map-get(global.$dark-theme-colors, 'background');
+  font-family: global.$font-family;
+  color: map-get(global.$dark-theme-colors, 'content');
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}

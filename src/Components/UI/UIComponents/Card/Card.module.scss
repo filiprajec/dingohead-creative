@@ -1,0 +1,17 @@
+/*
+  Card.scss
+  <> Filip Rajec
+*/
+
+@use "../../../../theme/global.module.scss";
+@use "../mixins.scss";
+
+.container {
+  @include mixins.glass;
+  display: flex;
+  padding: map-get(global.$padding-px, 'medium'); 
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}

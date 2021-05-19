@@ -1,0 +1,18 @@
+/*
+  padding.scss
+  <> Filip Rajec
+*/
+
+$px: (
+  "small": 5px,
+  "medium": 10px,
+  "large": 20px,
+  "xlarge": 40px,
+  "xxlarge": 80px,
+);
+
+@each $name, $value in $px {
+  :export {
+    #{$name}-px: #{$value};
+  }
+}

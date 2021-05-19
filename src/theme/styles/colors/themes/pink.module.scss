@@ -1,0 +1,19 @@
+@use 'sass:color';
+
+$night: #161515;
+$light-pink: #ecd7e0;
+
+$colors: (
+  background: $light-pink,
+  background-secondary: color.adjust($light-pink, $lightness: -5%),
+  background-tertiary: color.adjust($light-pink, $lightness: -10%),
+  content: $night,
+  content-secondary: color.adjust($night, $lightness: 5%),
+  content-tertiary: color.adjust($night, $lightness: 10%),
+);
+
+@each $name, $value in $colors {
+  :export {
+    #{$name}: #{$value};
+  }
+}

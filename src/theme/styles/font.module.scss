@@ -1,0 +1,53 @@
+/*
+  font.scss
+  <> Filip Rajec
+*/
+
+@use "sass:map";
+
+$family: "Karrik";
+
+//
+$vmin: (
+  "small": 3vmin,
+  "medium": 5vmin,
+  "large": 8vmin,
+  "xlarge": 10vmin,
+);
+
+@each $name, $value in $vmin {
+  :export {
+    #{$name}-vmin: #{$value};
+  }
+}
+
+//
+$px: (
+  "small": 16px,
+  "medium": 20px,
+  "large": 28px,
+  "xlarge": 42px,
+);
+
+@each $name, $value in $px {
+  :export {
+    #{$name}-px: #{$value};
+  }
+}
+
+// default font sizes are based on max(vmin,px)
+$max: ();
+
+@each $name, $value in $vmin {
+  $max: map.set(
+    $max,
+    $name,
+    unquote("max(#{map.get($vmin, $name)}, #{map.get($px, $name)})")
+  );
+}
+
+@each $name, $value in $max {
+  :export {
+    #{$name}-max: #{$value};
+  }
+}

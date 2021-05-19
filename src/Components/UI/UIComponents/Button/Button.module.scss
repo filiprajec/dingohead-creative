@@ -1,0 +1,53 @@
+/*
+  Button.scss
+  <> Filip Rajec
+*/
+
+@use "../../../../theme/global.module.scss";
+@use "../mixins.scss";
+
+.button {
+  @include mixins.glass-with-hover;
+
+  $max-button-width: 200x;
+  $button-font-size: map-get(global.$font-max, 'small'); 
+  $transition: all 0.2s ease-in-out;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  max-width: $max-button-width;
+  padding: map-get(global.$padding-px, 'medium') map-get(global.$padding-px, 'large'); 
+  margin: map-get(global.$padding-px, 'medium') map-get(global.$padding-px, 'small'); 
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  font-family: global.$font-family;
+  font-size: $button-font-size;
+  color: map-get(global.$light-theme-colors, 'content');
+
+  border: none;
+  border-radius: 999px;
+
+  cursor: pointer;
+  // transition: $transition;
+
+  .shape {
+    display: inline-block;
+    
+    position: relative;
+    width: unquote("calc(0.5 * #{$button-font-size})");
+    height: unquote("calc(0.5 * #{$button-font-size})");
+    margin-right: map-get(global.$padding-px, 'medium'); 
+    border-radius: 50%;
+    // transition: $transition;
+  }
+
+  &:hover {
+    .shape {
+      box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
+    }
+  }
+}

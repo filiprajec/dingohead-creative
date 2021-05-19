@@ -1,10 +1,19 @@
 module.exports = {
   siteMetadata: {
-    title: "dingohead-creative",
+    title: "dingohead creative",
   },
   plugins: [
-    "gatsby-plugin-sass",
-    "gatsby-plugin-image",
+    {
+      resolve: "gatsby-plugin-sass",
+      options: {
+        cssLoaderOptions: {
+          esModule: false,
+          modules: {
+            namedExport: false,
+          },
+        },
+      },
+    },
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {
@@ -13,15 +22,12 @@ module.exports = {
         icon: "src/images/icon.png",
       },
     },
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: "gatsby-plugin-google-fonts",
       options: {
-        name: "images",
-        path: "./src/images/",
+        fonts: ["major mono display"],
+        display: "swap",
       },
-      __key: "images",
     },
   ],
 };

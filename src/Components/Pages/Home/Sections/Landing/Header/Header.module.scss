@@ -1,0 +1,20 @@
+/*
+  Header.scss
+  <> Filip Rajec
+*/
+
+.header {
+  position: absolute;
+  display: flex;
+
+  width: 100%;
+  max-width: 300px;
+  height: calc(100% - 20vmin);
+  top: 0;
+  // padding: 10vmin;
+
+  justify-content: left;
+  flex-direction: column;
+
+  text-align: left;
+}

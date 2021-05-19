@@ -1,0 +1,11 @@
+/*
+  global.module.scss
+  <> Filip Rajec
+*/
+
+@forward './styles/font.module.scss' as font-*;
+@forward './styles/padding.module.scss' as padding-*;
+@forward './styles/zIndex.module.scss' as z-index-*;
+@forward './styles/colors/colors.module.scss' as colors-*;
+@forward './styles/colors/themes/light.module.scss' as light-theme-*;
+@forward './styles/colors/themes/dark.module.scss' as dark-theme-*;

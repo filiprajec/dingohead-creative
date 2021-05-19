@@ -1,0 +1,25 @@
+/*
+  zIndex.scss
+  <> Filip Rajec
+*/
+
+$elements: (
+  "text-forward": 10,
+  "text": 9,
+  "text-behind": 8,
+  "assets-forward": 7,
+  "assets": 6,
+  "assets-behind": 5,
+  "content-forward": 4,
+  "content": 3,
+  "content-behind": 2,
+  "background-forward": 1,
+  "background": 0,
+  "background-behind": -1,
+);
+
+@each $name, $value in $elements {
+  :export {
+    #{$name}: #{$value};
+  }
+}

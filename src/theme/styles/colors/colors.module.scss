@@ -1,0 +1,31 @@
+$basic: (
+  night: #161515,
+  swamp: #022b3a,
+  emerald: #33ca7f,
+  chrome-yellow: #faa916ff,
+  fire-opal: #f15946ff,
+  tufts-blue: #3c91e6ff,
+  ua-red: #e01a4fff,
+  gunmetal: #022b3aff,
+  french-violet: #6f2dbdff,
+  lavender-web: #e1e5f2ff,
+  alice-blue: #edf2f4ff,
+  caribbean-green: #03cea4ff,
+  light-pink: #ecd7e0,
+  geyser: #d5d7e4,
+  ultra-pink: #fd6fff,
+  screamin-green: #66ff6e,
+  bright-turquose: #13e7cb,
+  medium-slate-blue: #6b6bf1,
+  pastel-red: #fe6b63,
+  malibu: #75d6fd,
+  soft-purple: #b76cfd,
+  fluorescent-pink: #fe2181,
+  neon-blue: #0b1ffd,
+);
+
+@each $name, $value in $basic {
+  :export {
+    #{$name}: #{$value};
+  }
+}
