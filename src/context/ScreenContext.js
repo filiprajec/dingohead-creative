@@ -7,10 +7,22 @@ import { createContext, useEffect, useState } from "react";
 
 import { debounce } from "../utils/utilities";
 
+const isBrowser = typeof window !== "undefined";
+const defaultBrowserSize = { width: 1920, height: 1080 };
+
 export const useScreenValue = () => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
-  const [vmin, setVmin] = useState(window.innerWidth || Infinity, window.innerHeight || Infinity);
+  const [screenWidth, setScreenWidth] = useState(
+    isBrowser ? window.innerWidth : defaultBrowserSize.width
+  );
+  const [screenHeight, setScreenHeight] = useState(
+    isBrowser ? window.innerHeight : defaultBrowserSize.height
+  );
+  const [vmin, setVmin] = useState(
+    Math.min(
+      (isBrowser ? window.innerWidth : defaultBrowserSize.width) || Infinity,
+      (isBrowser ? window.innerHeight : defaultBrowserSize.height) || Infinity
+    )
+  );
 
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
@@ -21,11 +33,16 @@ export const useScreenValue = () => {
   };
 
   useEffect(() => {
-    const debouncedHandleResize = debounce(handleResize, 100);
-    handleResize();
-    window.addEventListener("resize", debouncedHandleResize);
+    let debouncedHandleResize = null;
+    if (isBrowser) {
+      debouncedHandleResize = debounce(handleResize, 100);
+      handleResize();
+      window.addEventListener("resize", debouncedHandleResize);
+    }
     return () => {
-      window.removeEventListener("resize", debouncedHandleResize);
+      if (isBrowser && debouncedHandleResize) {
+        window.removeEventListener("resize", debouncedHandleResize);
+      }
     };
   }, []);
 
@@ -33,9 +50,12 @@ export const useScreenValue = () => {
 };
 
 const getInitialContext = () => ({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  vmin: Math.min(window.innerWidth || Infinity, window.innerHeight || Infinity),
+  width: isBrowser ? window.innerWidth : defaultBrowserSize.width,
+  height: isBrowser ? window.innerHeight : defaultBrowserSize.height,
+  vmin: Math.min(
+    (isBrowser ? window.innerWidth : defaultBrowserSize.width) || Infinity,
+    (isBrowser ? window.innerHeight : defaultBrowserSize.height) || Infinity
+  ),
 });
 
 const ScreenContext = createContext(getInitialContext());
