@@ -6,7 +6,6 @@
 import { createElement } from "react";
 import update from "immutability-helper";
 
-
 const wrapComponentInProps =
   (component, userProps = {}) =>
   (factoryProps = {}) =>

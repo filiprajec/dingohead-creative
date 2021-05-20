@@ -5,8 +5,8 @@
 
 import UIButton from "./UIComponents/Button";
 import UICard from "./UIComponents/Card";
-import UIGrating from "./UIComponents/Grating";
+import UILinkExternal from "./UIComponents/LinkExternal";
 
 export const Button = UIButton;
 export const Card = UICard;
-export const Grating = UIGrating;
+export const LinkExternal = UILinkExternal;

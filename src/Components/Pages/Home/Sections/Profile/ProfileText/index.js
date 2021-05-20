@@ -4,11 +4,10 @@
 */
 
 import React, { useContext, forwardRef } from "react";
-import { Link } from "gatsby";
 
 import ThemeContext from "../../../../../../context/ThemeContext";
 import ScreenContext from "../../../../../../context/ScreenContext";
-
+import { LinkExternal } from "../../../../../UI";
 
 const ProfileText = forwardRef((props, ref) => {
   const { styles } = useContext(ThemeContext);
@@ -38,34 +37,35 @@ const ProfileText = forwardRef((props, ref) => {
       (among others).
       <br />
       I&apos;ve contributed to the www&apos;s on a gamechanging app,{" "}
-      <Link to="https://www.athletesai.com">
+      <LinkExternal to="https://www.athletesai.com">
         <span style={{ color: styles.colors.basic.caribbeanGreen }}>
           TennisAI 🎾
         </span>
-      </Link>
+      </LinkExternal>
       , helping people improve their tennis skills digitally & worked as a
       freelancer springing up small-scale projects.
       <br />
       I&apos;ve been on a worldwide collaboration building a powerhouse ⚡
       physics tool,{" "}
-      <Link to="https://github.com/GambitBSM">
-      <span style={{ color: styles.colors.basic.softPurple }}>
-        GAMBIT ♦️
-      </span>
-      </Link>,
-      that combines the latest data churning tools to find optimal solutions to
-      new physics models.
+      <LinkExternal to="https://github.com/GambitBSM">
+        <span style={{ color: styles.colors.basic.softPurple }}>GAMBIT ♦️</span>
+      </LinkExternal>
+      , that combines the latest data churning tools to find optimal solutions
+      to new physics models.
       <br />
       Off the clock, I work with a small team on a container-exchange ♻️
       startup,{" "}
-      <Link to="https://doitreusably.com/">
-      <span style={{ color: styles.colors.basic.fireOpal }}>Reusably</span></Link>,
-      banishing single use-plastics to their rightful grave 🪦 and volunteer for{" "}
-      <Link to="https://refugeeswelcome.org.au/">
-      <span style={{ color: styles.colors.basic.neonBlue }}>
-        {" "}
-        Refugees Welcome Australia
-      </span></Link>
+      <LinkExternal to="https://doitreusably.com/">
+        <span style={{ color: styles.colors.basic.fireOpal }}>Reusably</span>
+      </LinkExternal>
+      , banishing single use-plastics to their rightful grave 🪦 and volunteer
+      for{" "}
+      <LinkExternal to="https://refugeeswelcome.org.au/">
+        <span style={{ color: styles.colors.basic.neonBlue }}>
+          {" "}
+          Refugees Welcome Australia
+        </span>
+      </LinkExternal>
       , running the digital platform that helps connect refugees with spare
       rooms 🏠 and families in the community.
       <br />
