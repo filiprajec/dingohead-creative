@@ -35,7 +35,11 @@ const ParallaxSectionFactory = forwardRef(({ sections = [] }, ref) => {
     [parallaxOuterRef, parallaxInnerRef, sectionsRef]
   );
 
-  const { height: screenHeight } = screenValue;
+  const { height: screenHeight, width: screenWidth } = screenValue;
+
+  if (screenValue == null || screenHeight == null || screenWidth == null) {
+    return <></>;
+  }
 
   const styleOuter = {
     position: "absolute",
