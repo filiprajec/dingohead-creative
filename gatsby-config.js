@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: "dingohead creative",
+    siteUrl: "https://www.dingohead.com",
   },
   plugins: [
     {
