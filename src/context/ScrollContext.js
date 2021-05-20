@@ -5,6 +5,8 @@
 
 import { createContext, useEffect, useState, useCallback } from "react";
 
+const isBrowser = typeof window !== "undefined";
+
 export const useScrollValue = (scrollWindowOuterRef) => {
   const [scroll, setScroll] = useState(scrollWindowOuterRef?.current?.scrollY || 0);
 
@@ -32,7 +34,7 @@ export const useScrollValue = (scrollWindowOuterRef) => {
 };
 
 const getInitialContext = () => ({
-  scroll: window.scrollY,
+  scroll: isBrowser ? window.scrollY : 0,
 });
 
 const ScrollContext = createContext(getInitialContext());
