@@ -5,19 +5,20 @@
 
 import React from "react";
 
-import ParallaxSectionFactory from "../../Parallax/ParallaxSectionFactory";
+import { ParallaxSectionFactory } from "../../../Parallax";
 
 import LandingSection from "./Sections/Landing";
 import ProfileSection from "./Sections/Profile";
 import ConnectSection from "./Sections/Connect";
+import { ThemeProvider, useThemeValue } from "../../../context/ThemeContext";
 // -> import new sections here
 
 const Home = () => {
+  const theme = useThemeValue();
   const sections = [
     {
       component: LandingSection,
       props: {},
-      style: {},
     },
     {
       component: ProfileSection,
@@ -28,7 +29,11 @@ const Home = () => {
     },
     // -> add new sections here
   ];
-  return <ParallaxSectionFactory sections={sections} />;
+  return (
+    <ThemeProvider value={theme}>
+      <ParallaxSectionFactory sections={sections} backgroundColor={theme.styles.colors.background} />
+    </ThemeProvider>
+  );
 };
 
 export default Home;

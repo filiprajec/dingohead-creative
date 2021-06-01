@@ -5,13 +5,13 @@
 
 import { useContext } from "react";
 
-import ParallaxContext from "../../../context/ParallaxContext";
-import ScreenContext from "../../../context/ScreenContext";
+import ParallaxContext from "../context/ParallaxContext";
+import ScreenContext from "../context/ScreenContext";
 
 const RelativeSizesForParallaxContext = () => {
   const { height: screenHeight, width: screenWidth } =
     useContext(ScreenContext);
-  const { parentHeight } = useContext(ParallaxContext);
+  const { parentHeight, parentWidth } = useContext(ParallaxContext);
   const relativeSizes = {
     screen: {
       width: screenWidth,
@@ -26,20 +26,24 @@ const RelativeSizesForParallaxContext = () => {
     },
   };
   relativeSizes.parent = { ...relativeSizes.screen };
-  const propertiesToRescale = [
+  const heightPropertiesToRescale = [
     "height",
     "top",
     "bottom",
     "squareHeight",
     "speed",
   ];
-  propertiesToRescale.forEach((eachProperty) => {
+  heightPropertiesToRescale.forEach((eachProperty) => {
     relativeSizes.parent[eachProperty] *= parentHeight;
+  });
+  const widthPropertiesToRescale = ["width", "left", "right", "squareWidth"];
+  widthPropertiesToRescale.forEach((eachProperty) => {
+    relativeSizes.parent[eachProperty] *= parentWidth;
   });
   return relativeSizes;
 };
 
-const getDimesionStyleInPx = (dimensions, styleName) => {
+const getDimensionStyleInPx = (dimensions, styleName) => {
   const doesDimensionStyleExist = (dimensions_, styleName_) =>
     dimensions_.px?.[styleName_] != null ||
     dimensions_.parent?.[styleName_] != null ||
@@ -64,7 +68,7 @@ const getDimesionStyleInPx = (dimensions, styleName) => {
   return styleTotalPx;
 };
 
-const getAllDimensionStylesInPx = (dimensions) => {
+const getDimensionsInPx = (dimensions) => {
   const styles = [
     "top",
     "bottom",
@@ -78,27 +82,46 @@ const getAllDimensionStylesInPx = (dimensions) => {
   ];
   const dimensionsPx = {};
   styles.forEach((eachStyle) => {
-    dimensionsPx[eachStyle] = getDimesionStyleInPx(dimensions, eachStyle);
+    dimensionsPx[eachStyle] = getDimensionStyleInPx(dimensions, eachStyle);
   });
   return dimensionsPx;
 };
 
-const getCenteredPosition = (dimensions) => {
-  let { left, right, top, bottom } = dimensions;
-  const { width, height } = dimensions;
+// eslint-disable-next-line no-unused-vars
+const transformAnchorCenterX = (dimensions, outerContainerRef) => {
+  let { left, right } = dimensions;
+  const { width } = dimensions;
+  // get from DOM is not set
+  let width_ = width;
+  if (width_ == null && outerContainerRef.current) {
+    width_ = outerContainerRef.current.clientWidth;
+  }
+  // get transformed positions here
   if (left != null) {
-    left -= width / 2;
+    left -= width_ * dimensions.anchorX;
   }
   if (right != null) {
-    right -= width / 2;
+    right -= width_ * (1 - dimensions.anchorX);
   }
+  return { left, right};
+};
+
+const transformAnchorCenterY = (dimensions, outerContainerRef) => {
+  let { top, bottom } = dimensions;
+  const {  height } = dimensions;
+  // get from DOM is not set
+  let height_ = height;
+  if (height_ == null && outerContainerRef.current) {
+    height_ = outerContainerRef.current.clientHeight;
+  }
+  // get transformed positions here
   if (top != null) {
-    top -= height / 2;
+    top -= height_ * dimensions.anchorY;
   }
   if (bottom != null) {
-    bottom -= height / 2;
+    bottom -= height_ * (1 - dimensions.anchorY);
   }
-  return { left, right, top, bottom };
+  return { top, bottom };
 };
 
 const getPreferredWidth = (dimensions) =>
@@ -108,13 +131,32 @@ const getPreferredHeight = (dimensions) =>
   dimensions.height ?? dimensions.squareHeight ?? dimensions.squareWidth;
 
 // eslint-disable-next-line import/prefer-default-export
-export const getDimensionsPx = (dimensions) => {
-  let dimensionsPx = getAllDimensionStylesInPx(dimensions);
+export const getDimensionsPx = (dimensions, outerContainerRef) => {
+  let dimensionsPx = getDimensionsInPx(dimensions);
   dimensionsPx.width = getPreferredWidth(dimensionsPx);
   dimensionsPx.height = getPreferredHeight(dimensionsPx);
   dimensionsPx.speed = dimensionsPx.speed ?? 0;
-  if (dimensions.centered) {
-    dimensionsPx = { ...dimensionsPx, ...getCenteredPosition(dimensionsPx) };
+  // transform X center
+  if (dimensions.anchorX != null && dimensions.anchorX !== 0) {
+    const transformedAnchorX = transformAnchorCenterX(
+      { ...dimensionsPx, anchorX: dimensions.anchorX },
+      outerContainerRef
+    );
+    dimensionsPx = {
+      ...dimensionsPx,
+      ...transformedAnchorX,
+    };
+  }
+  // transform Y center
+  if (dimensions.anchorY != null && dimensions.anchorY !== 0) {
+    const transformedAnchorY = transformAnchorCenterY(
+      { ...dimensionsPx, anchorY: dimensions.anchorY },
+      outerContainerRef
+    );
+    dimensionsPx = {
+      ...dimensionsPx,
+      ...transformedAnchorY,
+    };
   }
   return dimensionsPx;
 };

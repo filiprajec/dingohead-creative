@@ -6,7 +6,7 @@
 import React, { useContext } from "react";
 
 import ThemeContext from "../../../../../../context/ThemeContext";
-import ScreenContext from "../../../../../../context/ScreenContext";
+import { ScreenContext } from "../../../../../../Parallax";
 
 import StyleSheet from "./Header.module.scss";
 

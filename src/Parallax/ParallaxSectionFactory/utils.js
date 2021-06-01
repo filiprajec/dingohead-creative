@@ -33,7 +33,7 @@ export const setSectionHeight = (
   if (height !== sectionHeights[index]) {
     setSectionHeights((prevSectionHeights) =>
       update(prevSectionHeights, {
-        $splice: [[index, index, height]],
+        $splice: [[index, 1, height]],
       })
     );
   }

@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 import { Link } from "gatsby";
 
 import ThemeContext from "../../../../../context/ThemeContext";
-import ParallaxContainer from "../../../../Parallax/ParallaxContainer";
+import { ParallaxContainer } from "../../../../../Parallax";
 import { Button } from "../../../../UI";
 
 const NotFound = () => {
@@ -29,7 +29,12 @@ const NotFound = () => {
         There&apos;s no page here 😭
       </h1>
       <Link to="/">
-        <Button accentColor={styles.colors.basic.emerald} style={{textDecoration: "none"}}>Click Me!</Button>
+        <Button
+          accentColor={styles.colors.basic.emerald}
+          style={{ textDecoration: "none" }}
+        >
+          Click Me!
+        </Button>
       </Link>
     </ParallaxContainer>
   );

@@ -7,9 +7,8 @@ import React, { useContext, useRef } from "react";
 import PropTypes from "prop-types";
 
 import ThemeContext from "../../../../../context/ThemeContext";
-import ParallaxContainer from "../../../../Parallax/ParallaxContainer";
+import { ParallaxContainer, useMonitorHeight } from "../../../../../Parallax";
 import LinkPanel from "./LinkPanel";
-import { useMonitorHeight } from "../../../../../utils/hooks";
 import { functionDefault } from "../../../../../utils/defaults";
 import PageProps from "./props";
 

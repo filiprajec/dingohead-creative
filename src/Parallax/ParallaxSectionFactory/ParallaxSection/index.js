@@ -7,17 +7,17 @@ import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import stylePropType from "react-style-proptype";
 
-import { ParallaxProvider } from "../../../../context/ParallaxContext";
+import { ParallaxProvider } from "../../context/ParallaxContext";
 import ParallaxContainer from "../../ParallaxContainer";
-import { createSectionLayers, getAlignment } from "./utils";
-import { functionDefault } from "../../../../utils/defaults";
+import { createContentLayer, getAlignment } from "./utils";
+import { functionDefault } from "../../utils/defaults";
 
 const ParallaxSection = forwardRef(
   (
     { section = {}, height = 1, setHeight = functionDefault, totalHeight = 0 },
     ref
   ) => {
-    const { contentLayer, backgroundLayer } = createSectionLayers(section, ref);
+    const contentLayer = createContentLayer(section, ref);
     const alignment = getAlignment(section, height, totalHeight);
 
     const renderSectionLayer = (sectionLayer) => {
@@ -42,6 +42,7 @@ const ParallaxSection = forwardRef(
           value={{
             offsetGlobal: sectionLayer.top,
             parentHeight: 1,
+            parentWidth: 1,
             index: sectionLayer.index,
             alignment,
           }}
@@ -63,7 +64,6 @@ const ParallaxSection = forwardRef(
 
     return (
       <>
-        {renderSectionLayer(backgroundLayer)}
         {renderSectionLayer(contentLayer)}
       </>
     );

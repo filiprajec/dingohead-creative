@@ -7,7 +7,7 @@ import React, { useRef } from "react";
 import PropTypes from "prop-types";
 
 import ProfileText from "./ProfileText";
-import { useMonitorHeight } from "../../../../../utils/hooks";
+import { useMonitorHeight } from "../../../../../Parallax";
 import { functionDefault } from "../../../../../utils/defaults";
 
 const Profile = ({ setHeight = functionDefault }) => {

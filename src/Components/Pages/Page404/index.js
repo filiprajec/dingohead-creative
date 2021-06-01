@@ -5,7 +5,7 @@
 
 import React from "react";
 
-import ParallaxSectionFactory from "../../Parallax/ParallaxSectionFactory";
+import {ParallaxSectionFactory} from "../../../Parallax";
 
 import NotFoundSection from "./Sections/NotFound";
 

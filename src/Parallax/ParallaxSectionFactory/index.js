@@ -7,14 +7,13 @@ import React, { forwardRef, useRef, useImperativeHandle } from "react";
 import PropTypes from "prop-types";
 
 import { useTotalHeight } from "./hooks";
-import { ThemeProvider, useThemeValue } from "../../../context/ThemeContext";
-import { ScreenProvider, useScreenValue } from "../../../context/ScreenContext";
-import { ScrollProvider, useScrollValue } from "../../../context/ScrollContext";
+import { ScreenProvider, useScreenValue } from "../context/ScreenContext";
+import { ScrollProvider, useScrollValue } from "../context/ScrollContext";
 import ParallaxSection, { sectionPropType } from "./ParallaxSection";
 import { packageSection, setSectionHeight } from "./utils";
-import { useStaticGUID, useStateCallback } from "../../../utils/hooks";
+import { useStaticGUID, useStateCallback } from "../utils/hooks";
 
-const ParallaxSectionFactory = forwardRef(({ sections = [] }, ref) => {
+const ParallaxSectionFactory = forwardRef(({ sections = [], backgroundColor = null }, ref) => {
   const parallaxOuterRef = useRef(null);
   const parallaxInnerRef = useRef(null);
   const sectionsRef = useRef([]);
@@ -22,7 +21,6 @@ const ParallaxSectionFactory = forwardRef(({ sections = [] }, ref) => {
     new Array(sections.length).fill(1)
   );
   const totalHeight = useTotalHeight(sectionHeights);
-  const themeValue = useThemeValue();
   const screenValue = useScreenValue();
   const scrollValue = useScrollValue(parallaxOuterRef);
   useImperativeHandle(
@@ -54,6 +52,7 @@ const ParallaxSectionFactory = forwardRef(({ sections = [] }, ref) => {
     position: "relative",
     height: totalHeight * screenHeight,
     overflow: "hidden",
+    backgroundColor,
   };
 
   const packageSectionStateBound = (section, index) =>
@@ -63,7 +62,6 @@ const ParallaxSectionFactory = forwardRef(({ sections = [] }, ref) => {
     setSectionHeight(height, index, sectionHeights, setSectionHeights);
 
   return (
-    <ThemeProvider value={themeValue}>
       <ScreenProvider value={screenValue}>
         <ScrollProvider value={scrollValue}>
           <div ref={parallaxOuterRef} style={styleOuter}>
@@ -86,12 +84,12 @@ const ParallaxSectionFactory = forwardRef(({ sections = [] }, ref) => {
           </div>
         </ScrollProvider>
       </ScreenProvider>
-    </ThemeProvider>
   );
 });
 
 ParallaxSectionFactory.propTypes = {
   sections: PropTypes.arrayOf(PropTypes.shape(sectionPropType)),
+  backgroundColor: PropTypes.string,
 };
 
 export default ParallaxSectionFactory;

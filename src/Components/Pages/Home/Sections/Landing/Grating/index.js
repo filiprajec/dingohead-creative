@@ -7,7 +7,7 @@ import React, { useContext, useRef } from "react";
 import PropTypes from "prop-types";
 
 import ThemeContext from "../../../../../../context/ThemeContext";
-import ParallaxContainer from "../../../../../Parallax/ParallaxContainer";
+import { ParallaxContainer } from "../../../../../../Parallax";
 
 const stepSizeDefault = {
   top: 0.05,

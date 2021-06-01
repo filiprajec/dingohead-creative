@@ -3,16 +3,10 @@
     <> Filip Rajec
 */
 
-import { useContext } from "react";
-
-import ThemeContext from "../../../../context/ThemeContext";
+import styles from "../../utils/styles";
 
 // eslint-disable-next-line import/prefer-default-export
-export const createSectionLayers = (section, ref) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { styles } = useContext(ThemeContext);
-  const { index, top } = section;
-
+export const createContentLayer = (section, ref) => {
   const addRefToLayer = (layer, ref_ = null) => ({
     ...layer,
     ref: ref_,
@@ -23,23 +17,11 @@ export const createSectionLayers = (section, ref) => {
     style: { zIndex, ...layer.style },
   });
 
-  const addBackgroundColorToLayer = (layer, backgroundColor) => ({
-    ...layer,
-    style: { ...layer.style, backgroundColor },
-  });
-
   let contentLayer = section;
   contentLayer = addRefToLayer(contentLayer, ref);
   contentLayer = addZIndexToLayer(contentLayer, styles.zIndex.content);
 
-  let backgroundLayer = { index, top };
-  backgroundLayer = addZIndexToLayer(backgroundLayer, styles.zIndex.background);
-  backgroundLayer = addBackgroundColorToLayer(
-    backgroundLayer,
-    styles.colors.background
-  );
-
-  return { contentLayer, backgroundLayer };
+  return contentLayer;
 };
 
 export const getAlignment = (section, height, totalHeight) => {

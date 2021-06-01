@@ -5,13 +5,13 @@
 
 import { useContext, useState, useEffect } from "react";
 
-import ParallaxContext from "../../../context/ParallaxContext";
-import ScreenContext from "../../../context/ScreenContext";
-import ScrollContext from "../../../context/ScrollContext";
+import ParallaxContext from "../context/ParallaxContext";
+import ScreenContext from "../context/ScreenContext";
+import ScrollContext from "../context/ScrollContext";
 import { getDimensionsPx } from "./utils";
 
 // eslint-disable-next-line import/prefer-default-export
-export const useParallaxStyle = (dimensions) => {
+export const useParallaxStyle = (dimensions, outerContainerRef) => {
   const { height: screenHeight } = useContext(ScreenContext);
   const { scroll } = useContext(ScrollContext);
   const {
@@ -20,10 +20,12 @@ export const useParallaxStyle = (dimensions) => {
     parentHeight,
     alignment,
   } = useContext(ParallaxContext);
-  const [offsetYPx, setOffsetYPx] = useState(0);
+  const [offsetYPx, setOffsetYPx] = useState(0); // local offset
   const [translateYPx, setTranslateYPx] = useState(0);
-  const dimensionsPx = getDimensionsPx(dimensions);
+  const dimensionsPx = getDimensionsPx(dimensions, outerContainerRef);
 
+  // calculates local offset
+  // calculates translate for speed=0
   useEffect(() => {
     setOffsetYPx(dimensionsPx.top);
     if (dimensionsPx.speed === 0) {
@@ -31,6 +33,7 @@ export const useParallaxStyle = (dimensions) => {
     }
   }, [dimensionsPx.top, dimensionsPx.speed]);
 
+  // calculates translate for speed != 0
   useEffect(() => {
     if (dimensionsPx.speed === 0) {
       return;

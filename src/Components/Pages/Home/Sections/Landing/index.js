@@ -7,15 +7,17 @@ import React, { useContext, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 import ThemeContext from "../../../../../context/ThemeContext";
-import ScreenContext from "../../../../../context/ScreenContext";
-import ParallaxContext from "../../../../../context/ParallaxContext";
+import {
+  ScreenContext,
+  ParallaxContext,
+  ParallaxContainer,
+} from "../../../../../Parallax";
 import Shape3d from "./Shape3d";
 import Header from "./Header";
 import Grating from "./Grating";
 import ScrollDownArrow from "./ScrollDownArrow";
 import ThemeSwitchPanel from "../../../../../theme/Components/ThemeSwitchPanel";
 import { Card } from "../../../../UI";
-import ParallaxContainer from "../../../../Parallax/ParallaxContainer";
 import { functionDefault } from "../../../../../utils/defaults";
 import PageProps from "./props";
 
@@ -95,7 +97,13 @@ const Landing = ({ setHeight = functionDefault }) => {
         dimensions={ThemePanelProps.dimensions}
         style={ThemePanelProps.style}
       >
-        <Card style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0, borderBottomRightRadius: 0 }}>
+        <Card
+          style={{
+            borderTopLeftRadius: 0,
+            borderTopRightRadius: 0,
+            borderBottomRightRadius: 0,
+          }}
+        >
           <ThemeSwitchPanel />
         </Card>
       </ParallaxContainer>
