@@ -1,1 +1,6 @@
-## 🚀 Profile page built using React.js/Gatsby with custom parallax page generations.
+# 👨‍💻 Profile page 
+## Built using React.js/Gatsby
+
+*Showcases preview of parallax page generator.*
+
+Deployed at https://dingohead.com
