@@ -3,7 +3,7 @@
   <> Filip Rajec
 */
 
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import ThemeContext from "../../../../../context/ThemeContext";
@@ -25,7 +25,6 @@ const Landing = ({ setHeight = functionDefault }) => {
   const { styles } = useContext(ThemeContext);
   const screen = useContext(ScreenContext);
   const { parentHeight } = useContext(ParallaxContext);
-  const testRef = useRef(null);
   useEffect(() => {
     setHeight(1);
   });
@@ -46,7 +45,6 @@ const Landing = ({ setHeight = functionDefault }) => {
       <ParallaxContainer
         dimensions={HeaderProps.dimensions}
         style={{ zIndex: styles.zIndex.text }}
-        ref={testRef}
       >
         <Header screen={screen} />
       </ParallaxContainer>
