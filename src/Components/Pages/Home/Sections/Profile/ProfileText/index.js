@@ -55,7 +55,7 @@ const ProfileText = forwardRef((props, ref) => {
       <br />
       Off the clock, I work with a small team on a container-exchange ♻️
       startup,{" "}
-      <LinkExternal to="https://doitreusably.com/">
+      <LinkExternal to="https://www.reusably.com.au/">
         <span style={{ color: styles.colors.basic.fireOpal }}>Reusably</span>
       </LinkExternal>
       , banishing single use-plastics to their rightful grave 🪦 and volunteer
